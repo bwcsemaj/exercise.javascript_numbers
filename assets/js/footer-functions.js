@@ -45,9 +45,14 @@ function additionAndSubtractionTest() {
 
 
 function additionAndMultiplicationTest() {
-    testCompute(0, "1+1*2");
+    testCompute(3, "1+1*2");
     testCompute(16, "10+6*1");
     testCompute(34, "10+2*12");
+
+    //Added tests
+    testCompute(16, "10+6*1");
+    testCompute(58, "10+2*12*2");
+
 }
 
 function subtractionAndMultiplicationTest() {

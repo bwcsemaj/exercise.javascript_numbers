@@ -3,16 +3,18 @@ function compute(expression) {
     //Find multiplication and division, find numbers left and right of
     //the operator, perform operation, replace number, operator, number
     //with value
-    console.log(expression);
+    console.log("START : " + expression);
+    expression = expression.replace("--", "+");
+    console.log("REMOVE -- : " + expression);
     expression = convertMinusToPlusMinus(expression);
-    console.log(expression);
+    console.log("CONVERT - to +- :" + expression);
     expression = substituteMultiplicationAndDivision(expression.split(""));
-    console.log(expression);
-    var sum = sumAllIntegersTogether(expression.split("+"));
+    console.log("SUB MULTI/DIV : " + expression);
+    var sum = sumAll(expression.split("+"));
     return sum;
 }
 
-function sumAllIntegersTogether(expressionArray){
+function sumAll(expressionArray){
     var sum = 0;
     for(var index = 0; expressionArray.length > index; index++){
         sum += parseFloat(expressionArray[index], 10)
@@ -36,33 +38,6 @@ function convertMinusToPlusMinus(expression) {
     }
     return expression;
 }
-
-
-// function amountOfOperators(expression) {
-//     var count = 0;
-//     var expressionArray = expression.split("");
-//     for (var index = 0; expressionArray.length > index; index++) {
-//         var character = expressionArray[index];
-//         if (character === "+" || character === "-" || character === "*" || character === "/") {
-//             count++;
-//         }
-//     }
-//     return count > 1;
-// }
-
-// function hasMultiplication(expression) {
-//     var expressionArray = expression.split("");
-//     for (var index = 0; expressionArray.length > index; index++) {
-//         var character = expressionArray[index];
-//         if (character !== "*") {
-//             continue;
-//         } else {
-//             continue;
-//         }
-
-//     }
-//     return false;
-// }
 
 function findMultiDiv(expressionArray) {
     for (var index = 0; expressionArray.length > index; index++) {
@@ -91,10 +66,10 @@ function substituteMultiplicationAndDivision(expressionArray) {
         var leftStart;
         if (leftOperatorCharacter === undefined) {
             leftStart = 0;
-            leftNumber = convertToInt(expressionArray.slice(leftStart, index));
+            leftNumber =  convertToFloat(expressionArray.slice(leftStart, index));
         } else {
             leftStart = leftOperatorIndex + 1;
-            leftNumber = convertToInt(expressionArray.slice(leftStart, index));
+            leftNumber =  convertToFloat(expressionArray.slice(leftStart, index));
         }
         console.log("LEFT NUMBER: " + leftNumber);
 
@@ -108,10 +83,10 @@ function substituteMultiplicationAndDivision(expressionArray) {
         if (rightOperatorIndex === undefined) {
             rightEnd = expressionArray.length - 1;
             var rightSlice = expressionArray.slice(index + 1, rightEnd + 1);
-            rightNumber = convertToInt(rightSlice);
+            rightNumber =  convertToFloat(rightSlice);
         } else {
             rightEnd = rightOperatorIndex - 1;
-            rightNumber = convertToInt(expressionArray.slice(index + 1, rightEnd + 1));
+            rightNumber =  convertToFloat(expressionArray.slice(index + 1, rightEnd + 1));
         }
         console.log("RIGHT NUMBER: " + rightNumber);
 
@@ -183,6 +158,6 @@ function findRightOperatorIndex(expressionArray, start) {
     return undefined;
 }
 
-function convertToInt(integerStringArray) {
+function convertToFloat(integerStringArray) {
     return parseFloat(integerStringArray.join(""), 10);
 }

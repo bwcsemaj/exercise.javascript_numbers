@@ -11,6 +11,7 @@ function compute(expression) {
     expression = substituteMultiplicationAndDivision(expression.split(""));
     console.log("SUB MULTI/DIV : " + expression);
     var sum = sumAll(expression.split("+"));
+    console.log("SUM : " + sum);
     return sum;
 }
 
